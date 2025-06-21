@@ -15,17 +15,18 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="w-full px-4 py-4 flex items-center justify-between border-b border-gray-800">
-      <div className="text-lg font-bold">Aditya Patel</div>
+    <nav className="navbar w-full px-4 py-4 flex items-center justify-between border-b border-gray-800">
+      <div className="navbar-items text-lg font-bold">Aditya Patel</div>
 
-      <div className="bg-gray-900 border border-gray-700 rounded-full px-6 py-2 flex gap-4 text-sm">
+      <div className="navbar-items bg-gray-900 border border-gray-700 rounded-full px-6 py-2 flex gap-4 text-sm">
         {navItems.map(({ href, label }) => (
           <Link
             key={href}
             href={href}
             className={clsx(
               'transition hover:text-blue-400',
-              pathname === href ? 'text-blue-500 font-medium' : 'text-gray-300'
+                pathname === href ? 'text-blue-500 font-medium' : 'text-gray-300',
+              'nav-btns'
             )}
           >
             {label}
@@ -33,7 +34,7 @@ export default function Navbar() {
         ))}
       </div>
 
-      <div>
+      <div className='navbar-items'>
         {/* Dark mode toggle will be slotted here */}
         <ThemeToggle />
       </div>

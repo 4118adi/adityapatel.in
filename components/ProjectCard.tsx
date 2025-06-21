@@ -7,7 +7,7 @@ type ProjectCardProps = {
   
   export default function ProjectCard({ title, description, tech, link }: ProjectCardProps) {
     return (
-      <div className="bg-[#111] border border-[#333] rounded-2xl p-6 shadow-md hover:shadow-blue-500/20 transition duration-200">
+      <div className=" border border-[#333] rounded-2xl p-6 shadow-md hover:shadow-blue-500/20 transition duration-200">
         <h3 className="text-2xl font-semibold text-white">{title}</h3>
         <p className="mt-3 text-gray-400">{description}</p>
         <div className="mt-4 flex flex-wrap gap-2">
