@@ -12,7 +12,7 @@ export default function Hero() {
             View Projects
           </a>
           <a href="/contact" className="px-4 py-2 border border-gray-700 text-gray-300 rounded hover:bg-gray-800 transition">
-            Contact Me
+            Contact Me!
           </a>
         </div>
       </section>
