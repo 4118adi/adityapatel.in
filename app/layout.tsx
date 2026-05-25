@@ -1,41 +1,21 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import Navbar from '@/components/Navbar'
-import ThemeProvider from '@/components/ThemeProvider'
+import "./globals.css";
 
-export const metadata: Metadata = {
-  title: 'Aditya Patel',
-}
+
+export const metadata = {
+	title: "Aditya Patel | Portfolio",
+	description: "Personal portfolio of Aditya Patel, web developer & designer.",
+};
+
+
+import ThemeToggle from "../components/ThemeToggle";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const theme = localStorage.getItem('theme');
-                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  const active = theme === 'dark' || (!theme && prefersDark);
-                  if (active) {
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                  }
-                } catch(e) {}
-              })();
-            `,
-          }}
-        />
-      </head>
-      <body>
-        <ThemeProvider>
-          <Navbar />
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
-  )
+		return (
+			<html lang="en" suppressHydrationWarning>
+				<body className="bg-gradient-to-br from-blue-100 to-purple-200 dark:from-gray-900 dark:to-gray-800 transition-colors min-h-screen">
+					<ThemeToggle />
+					{children}
+				</body>
+			</html>
+		);
 }
