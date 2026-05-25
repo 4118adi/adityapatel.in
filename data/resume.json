@@ -1,18 +1,24 @@
 {
 	"name": "Aditya Patel",
 	"handle": "@adityapatel",
-	"role": "Web Developer",
+	"role": "SDE",
 	"location": "India",
 	"email": "patel.aditya@dal.ca",
-	"intro": "Web developer and designer building clean, thoughtful digital experiences with a focus on performance, usability, and detail.",
-	"summary": "I enjoy turning rough ideas into polished products, working across frontend interfaces, component systems, and practical user flows.",
-	"skills": [
-		"TypeScript",
-		"React",
-		"Next.js",
-		"Tailwind",
-		"Node.js"
-	],
+	"intro": "Software engineer focused on building scalable backend systems, cloud-native applications, and clean developer-first digital experiences.",
+"summary": "Passionate about transforming ideas into production-ready software by working across backend development, APIs, databases, cloud infrastructure, and modern web technologies with a strong focus on performance, scalability, and usability.",
+"skills": [
+  "C#",
+  ".NET",
+  "ASP.NET",
+  "TypeScript",
+  "Next.js",
+  "React",
+  "Node.js",
+  "Microsoft SQL Server",
+  "Docker",
+  "Terraform",
+  "Google Cloud Platform"
+],
 	"links": [
 		{
 			"label": "GitHub",
@@ -28,26 +34,54 @@
 		}
 	],
 	"experience": [
-		{
-			"company": "MRI Software",
-			"role": "Software Engineer I",
-			"period": "May, 2025 - July, 2026",
-			"url": "https://www.mrisoftware.com/",
-			"description": "• Undergoing comprehensive training in .NET development, focusing on building robust and scalable software\nsolutions.\n• Learning key technologies and frameworks, including ASP.NET, C#, and Microsoft SQL Server, to enhance\ntechnical proficiency.\n• Actively collaborating with mentors and team members to understand enterprise-level application development\nprocesses and workflows.\n• Developing hands-on expertise through guided training exercises, preparing to contribute effectively to live projects."
-		}
-	],
+  {
+    "company": "MRI Software",
+    "role": "Software Engineer I",
+    "fromDate": "2025-05",
+    "toDate": "2026-07",
+    "url": "https://www.mrisoftware.com/",
+    "description": "<ul><li>Developing and maintaining enterprise-grade applications using <b>.NET</b>, ASP.NET, C#, and Microsoft SQL Server.</li><li>Designing and implementing scalable backend functionalities, RESTful APIs, and database-driven solutions for business applications.</li><li>Collaborating with cross-functional teams in agile development environments to deliver high-quality software solutions.</li><li>Performing debugging, performance optimization, and database management to improve application reliability and efficiency.</li><li>Following software development best practices including version control, code reviews, and structured testing workflows.</li></ul>",
+    "techStack": [
+      ".NET",
+      "ASP.NET",
+      "C#",
+      "Microsoft SQL Server"
+    ]
+  },
+  {
+    "company": "MRI Software",
+    "role": "Software Engineering Intern",
+    "fromDate": "2025-01",
+    "toDate": "2025-04",
+    "url": "https://www.mrisoftware.com/",
+    "description": "<ul><li>Completed intensive training in .NET development with focus on scalable and enterprise-level software applications.</li><li>Worked with ASP.NET, C#, and Microsoft SQL Server to build and understand backend application workflows.</li><li>Collaborated with mentors and development teams to gain practical exposure to software engineering processes and agile methodologies.</li><li>Developed hands-on experience in debugging, database operations, API integration, and application development practices.</li><li>Strengthened understanding of object-oriented programming, software architecture, and database management concepts.</li></ul>",
+    "techStack": [
+      ".NET",
+      "ASP.NET",
+      "C#",
+      "Microsoft SQL Server"
+    ]
+  }
+],
 	"projects": [
 		{
 			"name": "Portfolio",
 			"url": "https://adityapatel.in",
-			"description": "A minimal personal site built with Next.js and Tailwind CSS."
+			"description": "<p>A minimal personal site built with Next.js and Tailwind CSS.</p>",
+			"techStack": [
+				"Next.js",
+				"Tailwind CSS",
+				"TypeScript"
+			]
 		}
 	],
 	"education": [
 		{
 			"school": "Gsfc University",
 			"degree": "B.Tech in Computer Science and Engineering",
-			"period": "June, 2021 - May, 2025"
+			"fromDate": "2021-06",
+			"toDate": "2025-05",
+			"grade": "8.26/10 CGPA"
 		}
 	]
 }

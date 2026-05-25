@@ -7,7 +7,7 @@ import type {
 	ResumeLink,
 	ResumeProject,
 } from "@/lib/resume";
-import { Plus, Save, Trash2 } from "lucide-react";
+import { Bold, List, ListOrdered, Plus, Save, Trash2, Underline } from "lucide-react";
 import { useMemo, useState } from "react";
 import { saveResumeAction } from "./actions";
 
@@ -16,11 +16,12 @@ type FieldProps = {
 	value: string;
 	onChange: (value: string) => void;
 	textarea?: boolean;
+	type?: string;
 };
 
-function Field({ label, value, onChange, textarea }: FieldProps) {
+function Field({ label, value, onChange, textarea, type = "text" }: FieldProps) {
 	const className =
-		"mt-2 w-full rounded border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition-colors focus:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:focus:border-zinc-600";
+		"mt-2 w-full border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition-colors focus:border-zinc-950 focus:shadow-[3px_3px_0_#000] dark:border-zinc-800 dark:bg-zinc-900 dark:focus:border-zinc-100";
 
 	return (
 		<label className="block text-sm">
@@ -35,9 +36,69 @@ function Field({ label, value, onChange, textarea }: FieldProps) {
 				<input
 					className={className}
 					onChange={(event) => onChange(event.target.value)}
+					type={type}
 					value={value}
 				/>
 			)}
+		</label>
+	);
+}
+
+function RichTextEditor({
+	label,
+	value,
+	onChange,
+}: {
+	label: string;
+	value: string;
+	onChange: (value: string) => void;
+}) {
+	function runCommand(command: string) {
+		document.execCommand(command);
+	}
+
+	return (
+		<label className="block text-sm">
+			<span className="text-zinc-950 dark:text-zinc-100">{label}</span>
+			<div className="mt-2 overflow-hidden border border-zinc-200 dark:border-zinc-800">
+				<div className="flex gap-1 border-b border-zinc-200 bg-zinc-100 p-2 dark:border-zinc-800 dark:bg-zinc-950">
+					<button
+						className="morph-button flex h-8 w-8 items-center justify-center border border-transparent hover:border-zinc-300 dark:hover:border-zinc-700"
+						onClick={() => runCommand("bold")}
+						type="button"
+					>
+						<Bold className="h-4 w-4" />
+					</button>
+					<button
+						className="morph-button flex h-8 w-8 items-center justify-center border border-transparent hover:border-zinc-300 dark:hover:border-zinc-700"
+						onClick={() => runCommand("underline")}
+						type="button"
+					>
+						<Underline className="h-4 w-4" />
+					</button>
+					<button
+						className="morph-button flex h-8 w-8 items-center justify-center border border-transparent hover:border-zinc-300 dark:hover:border-zinc-700"
+						onClick={() => runCommand("insertUnorderedList")}
+						type="button"
+					>
+						<List className="h-4 w-4" />
+					</button>
+					<button
+						className="morph-button flex h-8 w-8 items-center justify-center border border-transparent hover:border-zinc-300 dark:hover:border-zinc-700"
+						onClick={() => runCommand("insertOrderedList")}
+						type="button"
+					>
+						<ListOrdered className="h-4 w-4" />
+					</button>
+				</div>
+				<div
+					className="rich-editor min-h-32 bg-zinc-50 px-3 py-2 text-sm outline-none dark:bg-zinc-900"
+					contentEditable
+					dangerouslySetInnerHTML={{ __html: value }}
+					onInput={(event) => onChange(event.currentTarget.innerHTML)}
+					suppressContentEditableWarning
+				/>
+			</div>
 		</label>
 	);
 }
@@ -90,12 +151,16 @@ export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 		}));
 	}
 
+	function parseCommaList(value: string) {
+		return value.split(",").map((item) => item.trim()).filter(Boolean);
+	}
+
 	return (
 		<form action={saveResumeAction} className="grid gap-9">
 			<input name="resume" type="hidden" value={payload} />
 
 			<section className="grid gap-4">
-				<h2 className="text-lg text-zinc-950 dark:text-zinc-100">Profile</h2>
+				<h2 className="section-title text-lg text-zinc-950 dark:text-zinc-100">Profile</h2>
 				<div className="grid gap-4 md:grid-cols-2">
 					<Field label="Name" onChange={(value) => update("name", value)} value={resume.name} />
 					<Field label="Handle" onChange={(value) => update("handle", value)} value={resume.handle} />
@@ -119,7 +184,7 @@ export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 				/>
 				<div className="grid gap-4">
 					{resume.links.map((link, index) => (
-						<div className="rounded border border-zinc-200 p-4 dark:border-zinc-800" key={index}>
+						<div className="morph-card border border-zinc-200 p-4 dark:border-zinc-800" key={index}>
 							<div className="grid gap-4 md:grid-cols-[1fr_1fr_auto]">
 								<Field
 									label="Label"
@@ -132,7 +197,7 @@ export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 									value={link.url}
 								/>
 								<button
-									className="mt-7 flex h-10 w-10 items-center justify-center rounded border border-zinc-200 text-zinc-950 hover:bg-zinc-100 dark:border-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-800"
+									className="morph-button mt-7 flex h-10 w-10 items-center justify-center border border-zinc-200 text-zinc-950 dark:border-zinc-800 dark:text-zinc-100"
 									onClick={() => removeArrayItem("links", index)}
 									type="button"
 								>
@@ -149,24 +214,40 @@ export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 					onAdd={() =>
 						update("experience", [
 							...resume.experience,
-							{ company: "", role: "", period: "", url: "", description: "" },
+							{
+								company: "",
+								role: "",
+								fromDate: "",
+								toDate: "",
+								url: "",
+								description: "",
+								techStack: [],
+							},
 						])
 					}
 					title="Experience"
 				/>
 				<div className="grid gap-4">
 					{resume.experience.map((item, index) => (
-						<div className="rounded border border-zinc-200 p-4 dark:border-zinc-800" key={index}>
+						<div className="morph-card border border-zinc-200 p-4 dark:border-zinc-800" key={index}>
 							<div className="grid gap-4 md:grid-cols-2">
 								<Field label="Company" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, company: value })} value={item.company} />
 								<Field label="Role" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, role: value })} value={item.role} />
-								<Field label="Period" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, period: value })} value={item.period} />
+								<Field label="From" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, fromDate: value })} type="month" value={item.fromDate} />
+								<Field label="To" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, toDate: value })} type="month" value={item.toDate} />
 								<Field label="URL" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, url: value })} value={item.url} />
 							</div>
 							<div className="mt-4">
-								<Field label="Description" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, description: value })} textarea value={item.description} />
+								<RichTextEditor label="Description" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, description: value })} value={item.description} />
 							</div>
-							<button className="mt-4 text-sm underline" onClick={() => removeArrayItem("experience", index)} type="button">
+							<div className="mt-4">
+								<Field
+									label="Tech stack highlights, comma separated"
+									onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, techStack: parseCommaList(value) })}
+									value={item.techStack.join(", ")}
+								/>
+							</div>
+							<button className="morph-link mt-4 text-sm" onClick={() => removeArrayItem("experience", index)} type="button">
 								Remove
 							</button>
 						</div>
@@ -176,20 +257,27 @@ export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 
 			<section>
 				<SectionHeader
-					onAdd={() => update("projects", [...resume.projects, { name: "", url: "", description: "" }])}
+					onAdd={() => update("projects", [...resume.projects, { name: "", url: "", description: "", techStack: [] }])}
 					title="Projects"
 				/>
 				<div className="grid gap-4">
 					{resume.projects.map((project, index) => (
-						<div className="rounded border border-zinc-200 p-4 dark:border-zinc-800" key={index}>
+						<div className="morph-card border border-zinc-200 p-4 dark:border-zinc-800" key={index}>
 							<div className="grid gap-4 md:grid-cols-2">
 								<Field label="Name" onChange={(value) => updateArrayItem<ResumeProject>("projects", index, { ...project, name: value })} value={project.name} />
 								<Field label="URL" onChange={(value) => updateArrayItem<ResumeProject>("projects", index, { ...project, url: value })} value={project.url} />
 							</div>
 							<div className="mt-4">
-								<Field label="Description" onChange={(value) => updateArrayItem<ResumeProject>("projects", index, { ...project, description: value })} textarea value={project.description} />
+								<RichTextEditor label="Description" onChange={(value) => updateArrayItem<ResumeProject>("projects", index, { ...project, description: value })} value={project.description} />
 							</div>
-							<button className="mt-4 text-sm underline" onClick={() => removeArrayItem("projects", index)} type="button">
+							<div className="mt-4">
+								<Field
+									label="Tech stack highlights, comma separated"
+									onChange={(value) => updateArrayItem<ResumeProject>("projects", index, { ...project, techStack: parseCommaList(value) })}
+									value={project.techStack.join(", ")}
+								/>
+							</div>
+							<button className="morph-link mt-4 text-sm" onClick={() => removeArrayItem("projects", index)} type="button">
 								Remove
 							</button>
 						</div>
@@ -199,18 +287,20 @@ export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 
 			<section>
 				<SectionHeader
-					onAdd={() => update("education", [...resume.education, { school: "", degree: "", period: "" }])}
+					onAdd={() => update("education", [...resume.education, { school: "", degree: "", fromDate: "", toDate: "", grade: "" }])}
 					title="Education"
 				/>
 				<div className="grid gap-4">
 					{resume.education.map((item, index) => (
-						<div className="rounded border border-zinc-200 p-4 dark:border-zinc-800" key={index}>
+						<div className="morph-card border border-zinc-200 p-4 dark:border-zinc-800" key={index}>
 							<div className="grid gap-4 md:grid-cols-3">
 								<Field label="School" onChange={(value) => updateArrayItem<ResumeEducation>("education", index, { ...item, school: value })} value={item.school} />
 								<Field label="Degree" onChange={(value) => updateArrayItem<ResumeEducation>("education", index, { ...item, degree: value })} value={item.degree} />
-								<Field label="Period" onChange={(value) => updateArrayItem<ResumeEducation>("education", index, { ...item, period: value })} value={item.period} />
+								<Field label="Grade" onChange={(value) => updateArrayItem<ResumeEducation>("education", index, { ...item, grade: value })} value={item.grade} />
+								<Field label="From" onChange={(value) => updateArrayItem<ResumeEducation>("education", index, { ...item, fromDate: value })} type="month" value={item.fromDate} />
+								<Field label="To" onChange={(value) => updateArrayItem<ResumeEducation>("education", index, { ...item, toDate: value })} type="month" value={item.toDate} />
 							</div>
-							<button className="mt-4 text-sm underline" onClick={() => removeArrayItem("education", index)} type="button">
+							<button className="morph-link mt-4 text-sm" onClick={() => removeArrayItem("education", index)} type="button">
 								Remove
 							</button>
 						</div>
@@ -219,7 +309,7 @@ export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 			</section>
 
 			<button
-				className="fixed bottom-5 right-5 flex items-center gap-2 rounded border border-zinc-200 bg-zinc-950 px-4 py-2 text-sm text-zinc-50 shadow-sm hover:bg-zinc-800 dark:border-zinc-700 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-zinc-200"
+				className="morph-button fixed bottom-5 right-5 flex items-center gap-2 border border-zinc-200 bg-zinc-950 px-4 py-2 text-sm text-zinc-50 dark:border-zinc-700 dark:bg-zinc-100 dark:text-zinc-950"
 				type="submit"
 			>
 				<Save className="h-4 w-4" />

@@ -4,6 +4,9 @@ import { getResumeData } from "@/lib/resume";
 import { loginAction, logoutAction } from "./actions";
 import { AdminEditor } from "./admin-editor";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 type AdminPageProps = {
 	searchParams: Promise<{
 		error?: string;
@@ -20,7 +23,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
 		return (
 			<>
 				<ThemeToggle />
-				<main className="m-auto max-w-[640px] px-6 py-24">
+				<main className="site-shell m-auto max-w-[640px] px-6 py-24">
 					<h1 className="pb-4 text-3xl text-zinc-950 dark:text-zinc-100">
 						Admin Locked
 					</h1>
@@ -37,7 +40,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
 		return (
 			<>
 				<ThemeToggle />
-				<main className="m-auto max-w-[640px] px-6 py-24">
+				<main className="site-shell m-auto max-w-[640px] px-6 py-24">
 					<h1 className="pb-4 text-3xl text-zinc-950 dark:text-zinc-100">
 						Admin
 					</h1>
@@ -57,7 +60,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
 							/>
 						</label>
 						<button
-							className="w-fit rounded border border-zinc-200 bg-zinc-950 px-4 py-2 text-sm text-zinc-50 hover:bg-zinc-800 dark:border-zinc-700 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-zinc-200"
+							className="morph-button w-fit border border-zinc-200 bg-zinc-950 px-4 py-2 text-sm text-zinc-50 dark:border-zinc-700 dark:bg-zinc-100 dark:text-zinc-950"
 							type="submit"
 						>
 							Sign In
@@ -73,7 +76,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
 	return (
 		<>
 			<ThemeToggle />
-			<header className="m-auto max-w-[960px] px-6 pb-8 pt-16">
+			<header className="site-shell m-auto max-w-[960px] px-6 pb-8 pt-16">
 				<div className="flex flex-wrap items-start justify-between gap-4">
 					<div>
 						<h1 className="text-3xl text-zinc-950 dark:text-zinc-100">
@@ -89,7 +92,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
 						) : null}
 					</div>
 					<form action={logoutAction}>
-						<button className="text-sm underline" type="submit">
+						<button className="morph-link text-sm" type="submit">
 							Log out
 						</button>
 					</form>

@@ -31,6 +31,7 @@ export async function saveResumeAction(formData: FormData) {
 	const isAuthenticated = await hasAdminSession();
 
 	if (!isAuthenticated) {
+		await clearAdminSession();
 		redirect("/admin");
 	}
 

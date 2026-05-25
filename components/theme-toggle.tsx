@@ -27,7 +27,7 @@ export function ThemeToggle() {
 	return (
 		<button
 			aria-label="Toggle theme"
-			className="fixed right-5 top-5 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-zinc-200 p-2 text-zinc-950 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-800"
+			className="morph-button fixed right-5 top-5 z-10 flex h-8 w-8 cursor-pointer items-center justify-center border border-zinc-200 bg-zinc-50 p-2 text-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100"
 			onClick={toggleTheme}
 			type="button"
 		>
