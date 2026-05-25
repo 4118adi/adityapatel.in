@@ -1,0 +1,53 @@
+{
+	"name": "Aditya Patel",
+	"handle": "@adityapatel",
+	"role": "Web Developer",
+	"location": "India",
+	"email": "patel.aditya@dal.ca",
+	"intro": "Web developer and designer building clean, thoughtful digital experiences with a focus on performance, usability, and detail.",
+	"summary": "I enjoy turning rough ideas into polished products, working across frontend interfaces, component systems, and practical user flows.",
+	"skills": [
+		"TypeScript",
+		"React",
+		"Next.js",
+		"Tailwind",
+		"Node.js"
+	],
+	"links": [
+		{
+			"label": "GitHub",
+			"url": "https://github.com/4118adi"
+		},
+		{
+			"label": "LinkedIn",
+			"url": "https://linkedin.com/in/4118adi"
+		},
+		{
+			"label": "Email",
+			"url": "mailto:patel.aditya@dal.ca"
+		}
+	],
+	"experience": [
+		{
+			"company": "MRI Software",
+			"role": "Software Engineer I",
+			"period": "May, 2025 - July, 2026",
+			"url": "https://www.mrisoftware.com/",
+			"description": "• Undergoing comprehensive training in .NET development, focusing on building robust and scalable software\nsolutions.\n• Learning key technologies and frameworks, including ASP.NET, C#, and Microsoft SQL Server, to enhance\ntechnical proficiency.\n• Actively collaborating with mentors and team members to understand enterprise-level application development\nprocesses and workflows.\n• Developing hands-on expertise through guided training exercises, preparing to contribute effectively to live projects."
+		}
+	],
+	"projects": [
+		{
+			"name": "Portfolio",
+			"url": "https://adityapatel.in",
+			"description": "A minimal personal site built with Next.js and Tailwind CSS."
+		}
+	],
+	"education": [
+		{
+			"school": "Gsfc University",
+			"degree": "B.Tech in Computer Science and Engineering",
+			"period": "June, 2021 - May, 2025"
+		}
+	]
+}
