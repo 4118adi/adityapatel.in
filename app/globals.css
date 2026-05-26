@@ -367,7 +367,7 @@ strong {
 }
 
 .dark .morph-chip:hover,
-.dark .morph-button:hover.
+.dark .morph-button:hover,
 .dark .morph-link:hover {
 	border-color: rgb(34 211 238 / 0.65);
 	box-shadow:
