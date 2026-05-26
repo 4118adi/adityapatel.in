@@ -1,14 +1,14 @@
 {
 	"name": "Aditya Patel",
 	"handle": "@adityapatel",
-	"role": "SDE",
+	"role": "SDE @ Mri Software",
 	"location": "India",
 	"email": "patel.aditya@dal.ca",
 	"intro": "Software engineer focused on building scalable backend systems, cloud-native applications, and clean developer-first digital experiences.",
 "summary": "Passionate about transforming ideas into production-ready software by working across backend development, APIs, databases, cloud infrastructure, and modern web technologies with a strong focus on performance, scalability, and usability.",
 "skills": [
   "C#",
-  ".NET",
+  ".NET Core",
   "ASP.NET",
   "TypeScript",
   "Next.js",
@@ -17,7 +17,10 @@
   "Microsoft SQL Server",
   "Docker",
   "Terraform",
-  "Google Cloud Platform"
+  "Azure",
+  "OracleDB",
+  "KendiUI",
+  "SSRS"
 ],
 	"links": [
 		{
