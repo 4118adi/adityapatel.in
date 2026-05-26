@@ -55,11 +55,15 @@ export async function getResumeData(): Promise<ResumeData> {
 		.from("resumes")
 		.select("content")
 		.eq("slug", "main")
-		.single();
+		.maybeSingle();
 
 	if (error) {
 		console.error(error);
 		throw new Error("Failed to fetch resume data");
+	}
+
+	if (!data) {
+		return normalizeResumeData({} as ResumeData);
 	}
 
 	return normalizeResumeData(data.content as ResumeData);
