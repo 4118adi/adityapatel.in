@@ -356,13 +356,13 @@ export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 									value={item.toDate}
 									isPresent={item.isPresent ?? false}
 									onDateChange={(value) =>
-										updateArrayItem<ResumeExperience>("experience", index, {
+										updateArrayItem<ResumeEducation>("experience", index, {
 											...item,
 											toDate: value,
 										})
 									}
 									onPresentChange={(checked) =>
-										updateArrayItem<ResumeExperience>("experience", index, {
+										updateArrayItem<ResumeEducation>("experience", index, {
 											...item,
 											isPresent: checked,
 										})
