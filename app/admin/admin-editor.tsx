@@ -17,9 +17,10 @@ type FieldProps = {
 	onChange: (value: string) => void;
 	textarea?: boolean;
 	type?: string;
+	disabled?: boolean;
 };
 
-function Field({ label, value, onChange, textarea, type = "text" }: FieldProps) {
+function Field({ label, value, onChange, textarea, type = "text", disabled = false}: FieldProps) {
 	const className =
 		"mt-2 w-full border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition-colors focus:border-zinc-950 focus:shadow-[3px_3px_0_#000] dark:border-zinc-800 dark:bg-zinc-900 dark:focus:border-zinc-50";
 
@@ -38,6 +39,7 @@ function Field({ label, value, onChange, textarea, type = "text" }: FieldProps) 
 					onChange={(event) => onChange(event.target.value)}
 					type={type}
 					value={value}
+					disabled={disabled}
 				/>
 			)}
 		</label>
