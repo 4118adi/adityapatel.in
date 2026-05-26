@@ -2,6 +2,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 html {
 	scroll-behavior: smooth;
 	scroll-snap-type: y mandatory;
