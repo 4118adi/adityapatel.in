@@ -73,10 +73,10 @@ export default async function Home() {
 	const resume = await getResumeData();
 	const sections = [
 		"Intro",
-		...(resume.experience.length > 0 ? ["Experience"] : []),
-		...(resume.projects.length > 0 ? ["Projects"] : []),
-		...(resume.education.length > 0 ? ["Education"] : []),
-		"Contact",
+		...(resume.experience.length > 0 ? ["past"] : []),
+		...(resume.projects.length > 0 ? ["projects"] : []),
+		...(resume.education.length > 0 ? ["education"] : []),
+		"Socials",
 	];
 
 	return (
@@ -115,7 +115,7 @@ export default async function Home() {
 					<section className="screen-section" data-screen-section>
 						<div className="section-inner m-auto w-full max-w-[640px] px-6">
 							<h2 className="section-title motion-item pb-6 text-lg text-zinc-950 dark:text-zinc-100">
-								Experience
+								past
 							</h2>
 							<div className="grid gap-4">
 								{resume.experience.map((item) => (
@@ -157,7 +157,7 @@ export default async function Home() {
 					<section className="screen-section" data-screen-section>
 						<div className="section-inner m-auto w-full max-w-[640px] px-6">
 							<h2 className="section-title motion-item pb-6 text-lg text-zinc-950 dark:text-zinc-100">
-								Projects
+								projects
 							</h2>
 							<div className="grid gap-4">
 								{resume.projects.map((project, index) => (
@@ -189,7 +189,7 @@ export default async function Home() {
 					<section className="screen-section" data-screen-section>
 						<div className="section-inner m-auto w-full max-w-[640px] px-6">
 							<h2 className="section-title motion-item pb-6 text-lg text-zinc-950 dark:text-zinc-100">
-								Education
+								education
 							</h2>
 							<div className="grid gap-4">
 								{resume.education.map((item) => (
@@ -220,7 +220,7 @@ export default async function Home() {
 			<footer className="screen-section border-t border-zinc-200 dark:border-zinc-800" data-screen-section>
 				<div className="section-inner m-auto w-full max-w-[640px] px-6">
 					<h2 className="section-title motion-item pb-6 text-lg text-zinc-950 dark:text-zinc-100">
-						Contact
+						socials
 					</h2>
 					<div className="motion-item flex flex-wrap gap-2">
 					{resume.links.map((link) => (
