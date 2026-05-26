@@ -14,13 +14,13 @@ const skillColors = [
 ];
 
 function Chip({ children, index }: { children: ReactNode; index: number }) {
-	return (
-		<span
-			className={`morph-chip mr-1 inline-block border border-zinc-200 px-[6px] py-[3px] dark:border-zinc-800 ${skillColors[index % skillColors.length]}`}
-		>
-			{children}
-		</span>
-	);
+  return (
+    <span
+      className={`morph-chip inline-flex border border-zinc-200 px-[6px] py-[3px] dark:border-zinc-800 ${skillColors[index % skillColors.length]}`}
+    >
+      {children}
+    </span>
+  );
 }
 
 function TechStack({ items }: { items: string[] }) {
@@ -96,14 +96,16 @@ export default async function Home() {
 					<p className="motion-item pt-2 text-sm">{resume.summary}</p>
 					{resume.skills.length > 0 ? (
 						<p className="motion-item pt-2 text-sm">
-							I primarily use{" "}
-							{resume.skills.map((skill, index) => (
-								<Chip index={index} key={skill}>
-									{skill}{" "}
-								</Chip>
-							))}
-							for building my software.
-						</p>
+  <span className="inline-flex flex-wrap items-center gap-2">
+    I primarily use
+    {resume.skills.map((skill, index) => (
+      <Chip index={index} key={skill}>
+        {skill}
+      </Chip>
+    ))}
+    for building my software.
+  </span>
+</p>
 					) : null}
 				</div>
 			</header>
