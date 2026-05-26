@@ -73,9 +73,9 @@ export default async function Home() {
 	const resume = await getResumeData();
 	const sections = [
 		"Intro",
-		...(resume.experience.length > 0 ? ["past"] : []),
-		...(resume.projects.length > 0 ? ["projects"] : []),
-		...(resume.education.length > 0 ? ["education"] : []),
+		...(resume.experience.length > 0 ? ["been there, done that"] : []),
+		...(resume.projects.length > 0 ? ["things I've built"] : []),
+		...(resume.education.length > 0 ? ["formal education"] : []),
 		"Socials",
 	];
 
@@ -115,7 +115,7 @@ export default async function Home() {
 					<section className="screen-section" data-screen-section>
 						<div className="section-inner m-auto w-full max-w-[640px] px-6">
 							<h2 className="section-title motion-item pb-6 text-lg text-zinc-950 dark:text-zinc-100">
-								past
+								been there, done that
 							</h2>
 							<div className="grid gap-4">
 								{resume.experience.map((item) => (
@@ -157,7 +157,7 @@ export default async function Home() {
 					<section className="screen-section" data-screen-section>
 						<div className="section-inner m-auto w-full max-w-[640px] px-6">
 							<h2 className="section-title motion-item pb-6 text-lg text-zinc-950 dark:text-zinc-100">
-								projects
+								things I've built
 							</h2>
 							<div className="grid gap-4">
 								{resume.projects.map((project, index) => (
@@ -189,7 +189,7 @@ export default async function Home() {
 					<section className="screen-section" data-screen-section>
 						<div className="section-inner m-auto w-full max-w-[640px] px-6">
 							<h2 className="section-title motion-item pb-6 text-lg text-zinc-950 dark:text-zinc-100">
-								education
+								formal education
 							</h2>
 							<div className="grid gap-4">
 								{resume.education.map((item) => (
