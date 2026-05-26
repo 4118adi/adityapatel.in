@@ -273,22 +273,22 @@ export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 								<Field label="Role" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, role: value })} value={item.role} />
 								<Field label="From" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, fromDate: value })} type="month" value={item.fromDate} />
 								<MonthOrPresentField
-	label="To"<
-	value={item.toDate}
-	isPresent={item.isPresent ?? false}
-	onDateChange={(value) =>
-		updateArrayItem<ResumeExperience>("experience", index, {
-			...item,
-			toDate: value,
-		})
-	}
-	onPresentChange={(checked) =>
-		updateArrayItem<ResumeExperience>("experience", index, {
-			...item,
-			isPresent: checked,
-		})
-	}
-/>Field label="URL" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, url: value })} value={item.url} />
+									label="To"
+									value={item.toDate}
+									isPresent={item.isPresent ?? false}
+									onDateChange={(value) =>
+										updateArrayItem<ResumeExperience>("experience", index, {
+											...item,
+											toDate: value,
+										})
+									}
+									onPresentChange={(checked) => 
+										updateArrayItem<ResumeExperience>("experience", index, {
+											...item,
+											isPresent: checked,
+										})
+									} />
+									<Field label="URL" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, url: value })} value={item.url} />
 							</div>
 							<div className="mt-4">
 								<RichTextEditor label="Description" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, description: value })} value={item.description} />
@@ -352,22 +352,23 @@ export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 								<Field label="Grade" onChange={(value) => updateArrayItem<ResumeEducation>("education", index, { ...item, grade: value })} value={item.grade} />
 								<Field label="From" onChange={(value) => updateArrayItem<ResumeEducation>("education", index, { ...item, fromDate: value })} type="month" value={item.fromDate} />
 								<MonthOrPresentField
-	label="To"
-	value={item.toDate}
-	isPresent={item.isPresent ?? false}
-	onDateChange={(value) =>
-		updateArrayItem<ResumeExperience>("experience", index, {
-			...item,
-			toDate: value,
-		})
-	}
-	onPresentChange={(checked) =>
-		updateArrayItem<ResumeExperience>("experience", index, {
-			...item,
-			isPresent: checked,
-		})
-	}
-/></div>
+									label="To"
+									value={item.toDate}
+									isPresent={item.isPresent ?? false}
+									onDateChange={(value) =>
+										updateArrayItem<ResumeExperience>("experience", index, {
+											...item,
+											toDate: value,
+										})
+									}
+									onPresentChange={(checked) =>
+										updateArrayItem<ResumeExperience>("experience", index, {
+											...item,
+											isPresent: checked,
+										})
+									}
+									/>
+							</div>
 							<button className="morph-link mt-4 text-sm" onClick={() => removeArrayItem("education", index)} type="button">
 								Remove
 							</button>
