@@ -21,7 +21,7 @@ type FieldProps = {
 
 function Field({ label, value, onChange, textarea, type = "text" }: FieldProps) {
 	const className =
-		"mt-2 w-full border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition-colors focus:border-zinc-950 focus:shadow-[3px_3px_0_#000] dark:border-zinc-800 dark:bg-zinc-900 dark:focus:border-zinc-100";
+		"mt-2 w-full border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition-colors focus:border-zinc-950 focus:shadow-[3px_3px_0_#000] dark:border-zinc-800 dark:bg-zinc-900 dark:focus:border-zinc-50";
 
 	return (
 		<label className="block text-sm">
@@ -41,6 +41,38 @@ function Field({ label, value, onChange, textarea, type = "text" }: FieldProps) 
 				/>
 			)}
 		</label>
+	);
+}
+
+function MonthOrPresentField({
+	label,
+	value,
+	onChange,
+}: {
+	label: string;
+	value: string;
+	onChange: (value: string) => void;
+}) {
+	const isPresent = value === "Present";
+
+	return (
+		<div className="grid gap-2">
+			<Field
+				label={label}
+				onChange={onChange}
+				type="month"
+				value={isPresent ? "" : value}
+			/>
+			<label className="flex items-center gap-2 text-sm text-zinc-950 dark:text-zinc-100">
+				<input
+					checked={isPresent}
+					className="h-4 w-4"
+					onChange={(event) => onChange(event.target.checked ? "Present" : "")}
+					type="checkbox"
+				/>
+				<span>Present</span>
+			</label>
+		</div>
 	);
 }
 
@@ -234,7 +266,7 @@ export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 								<Field label="Company" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, company: value })} value={item.company} />
 								<Field label="Role" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, role: value })} value={item.role} />
 								<Field label="From" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, fromDate: value })} type="month" value={item.fromDate} />
-								<Field label="To" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, toDate: value })} type="month" value={item.toDate} />
+								<MonthOrPresentField label="To" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, toDate: value })} value={item.toDate} />
 								<Field label="URL" onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, url: value })} value={item.url} />
 							</div>
 							<div className="mt-4">
@@ -298,7 +330,7 @@ export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 								<Field label="Degree" onChange={(value) => updateArrayItem<ResumeEducation>("education", index, { ...item, degree: value })} value={item.degree} />
 								<Field label="Grade" onChange={(value) => updateArrayItem<ResumeEducation>("education", index, { ...item, grade: value })} value={item.grade} />
 								<Field label="From" onChange={(value) => updateArrayItem<ResumeEducation>("education", index, { ...item, fromDate: value })} type="month" value={item.fromDate} />
-								<Field label="To" onChange={(value) => updateArrayItem<ResumeEducation>("education", index, { ...item, toDate: value })} type="month" value={item.toDate} />
+								<MonthOrPresentField label="To" onChange={(value) => updateArrayItem<ResumeEducation>("education", index, { ...item, toDate: value })} value={item.toDate} />
 							</div>
 							<button className="morph-link mt-4 text-sm" onClick={() => removeArrayItem("education", index)} type="button">
 								Remove
