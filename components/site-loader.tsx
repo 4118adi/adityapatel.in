@@ -19,6 +19,6 @@ export function SiteLoader() {
 
 	return (
 		<div aria-label="Loading site" className="site-loader" role="status">
-			<div className="site-loader-mark">
+			<div className="site-loader-mark"></div></div>
 	);
 }
