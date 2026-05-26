@@ -382,7 +382,7 @@ strong {
 
 .dark .morph-button:active {
 	box-shadow: 1px 1px 0 rgb(34 211 238);
-]}
+}
 
 .morph-link {
 	display: inline-block;
