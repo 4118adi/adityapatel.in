@@ -64,14 +64,14 @@ function MonthOrPresentField({
 				value={isPresent ? "" : value}
 			/>
 			<label className="flex items-center gap-2 text-sm text-zinc-950 dark:text-zinc-100">
-				<input
-					checked={isPresent}
-					className="h-4 w-4"
-					onChange={(event) => onChange(event.target.checked ? "Present" : "")}
-					type="checkbox"
-				/>
-				<span>Present</span>
-			</label>
+	<input
+		type="checkbox"
+		className="appearance-auto h-4 w-4 accent-zinc-900 dark:accent-zinc-100"
+		checked={isPresent}
+		onChange={(e) => onPresentChange(e.target.checked)}
+	/>
+	<span>Present</span>
+</label>
 		</div>
 	);
 }
