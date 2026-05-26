@@ -36,10 +36,19 @@ export async function saveResumeAction(formData: FormData) {
 	}
 
 	const payload = String(formData.get("resume") || "");
-	const parsed = JSON.parse(payload) as ResumeData;
+
+	let parsed: ResumeData;
+
+	try {
+		parsed = JSON.parse(payload) as ResumeData;
+	} catch {
+		redirect("/admin?error=json");
+	}
 
 	await saveResumeData(normalizeResumeData(parsed));
+
 	revalidatePath("/");
 	revalidatePath("/admin");
+
 	redirect("/admin?saved=1");
 }
