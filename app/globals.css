@@ -338,7 +338,6 @@ strong {
 }
 
 .morph-chip,
-.morph-button,
 .morph-link {
 	border-radius: 0;
 	transition:
@@ -394,6 +393,7 @@ strong {
 
 .dark .morph-button:active {
 	box-shadow: 1px 1px 0 rgb(34 211 238);
+	transform: translate(0,0);
 }
 
 .morph-link {
