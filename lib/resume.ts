@@ -1,5 +1,4 @@
-import { promises as fs } from "fs";
-import path from "path";
+import { createClient } from "@supabase/supabase-js";
 
 export type ResumeLink = {
 	label: string;
@@ -46,15 +45,46 @@ export type ResumeData = {
 	education: ResumeEducation[];
 };
 
-export const resumeDataPath = path.join(process.cwd(), "data", "resume.json");
+const supabase = createClient(
+	process.env.NEXT_PUBLIC_SUPABASE_URL!,
+	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+);
 
 export async function getResumeData(): Promise<ResumeData> {
-	const file = await fs.readFile(resumeDataPath, "utf8");
-	return normalizeResumeData(JSON.parse(file) as ResumeData);
+	const { data, error } = await supabase
+		.from("resumes")
+		.select("content")
+		.eq("slug", "main")
+		.single();
+
+	if (error) {
+		console.error(error);
+		throw new Error("Failed to fetch resume data");
+	}
+
+	return normalizeResumeData(data.content as ResumeData);
 }
 
 export async function saveResumeData(data: ResumeData) {
-	await fs.writeFile(resumeDataPath, `${JSON.stringify(data, null, "\t")}\n`);
+	const normalized = normalizeResumeData(data);
+
+	const { error } = await supabase
+		.from("resumes")
+		.upsert(
+			{
+				slug: "main",
+				content: normalized,
+				updated_at: new Date().toISOString(),
+			},
+			{
+				onConflict: "slug",
+			},
+		);
+
+	if (error) {
+		console.error(error);
+		throw new Error("Failed to save resume data");
+	}
 }
 
 function escapeHtml(value: string) {
@@ -96,6 +126,7 @@ export function sanitizeHtml(value: string) {
 function latestDateValue(item: { fromDate?: string; toDate?: string }) {
 	const date = item.toDate || item.fromDate;
 	const time = date ? new Date(date).getTime() : 0;
+
 	return Number.isNaN(time) ? 0 : time;
 }
 
@@ -108,7 +139,9 @@ function normalizeMonth(value: string) {
 }
 
 function sortByLatestDate<T extends { fromDate?: string; toDate?: string }>(items: T[]) {
-	return [...items].sort((first, second) => latestDateValue(second) - latestDateValue(first));
+	return [...items].sort(
+		(first, second) => latestDateValue(second) - latestDateValue(first),
+	);
 }
 
 export function normalizeResumeData(data: ResumeData): ResumeData {
@@ -121,7 +154,11 @@ export function normalizeResumeData(data: ResumeData): ResumeData {
 		intro: data.intro?.trim() || "",
 		summary: data.summary?.trim() || "",
 		skills: (data.skills || []).map((skill) => skill.trim()).filter(Boolean),
-		links: (data.links || []).filter((link) => link.label && link.url),
+
+		links: (data.links || []).filter(
+			(link) => link.label?.trim() && link.url?.trim(),
+		),
+
 		experience: sortByLatestDate(
 			(data.experience || [])
 				.filter((item) => item.company || item.role)
@@ -133,9 +170,12 @@ export function normalizeResumeData(data: ResumeData): ResumeData {
 					toDate: normalizeMonth(item.toDate),
 					url: item.url?.trim() || "",
 					description: sanitizeHtml(item.description || ""),
-					techStack: (item.techStack || []).map((tech) => tech.trim()).filter(Boolean),
+					techStack: (item.techStack || [])
+						.map((tech) => tech.trim())
+						.filter(Boolean),
 				})),
 		),
+
 		projects: (data.projects || [])
 			.filter((project) => project.name)
 			.map((project) => ({
@@ -143,8 +183,11 @@ export function normalizeResumeData(data: ResumeData): ResumeData {
 				name: project.name?.trim() || "",
 				url: project.url?.trim() || "",
 				description: sanitizeHtml(project.description || ""),
-				techStack: (project.techStack || []).map((tech) => tech.trim()).filter(Boolean),
+				techStack: (project.techStack || [])
+					.map((tech) => tech.trim())
+					.filter(Boolean),
 			})),
+
 		education: sortByLatestDate(
 			(data.education || [])
 				.filter((item) => item.school || item.degree)
