@@ -53,12 +53,12 @@ function formatDate(value: string) {
 	}).format(date);
 }
 
-function formatRange(fromDate: string, toDate: string) {
-	if (!fromDate && !toDate) {
+function formatRange(fromDate: string, toDate: string, isPresent?: boolean) {
+	if (!fromDate && !toDate && !isPresent) {
 		return "";
 	}
 
-	if (fromDate && !toDate) {
+	if (fromDate && (isPresent || !toDate)) {
 		return `${formatDate(fromDate)} - Present`;
 	}
 
@@ -137,7 +137,7 @@ export default async function Home() {
 												)}
 											</h3>
 											<p className="text-xs text-zinc-500">
-												{formatRange(item.fromDate, item.toDate)}
+												{formatRange(item.fromDate, item.toDate, item.isPresent)}
 											</p>
 										</div>
 										<p className="pb-2 text-sm">{item.role}</p>
@@ -202,7 +202,7 @@ export default async function Home() {
 												{item.school}
 											</h3>
 											<p className="text-xs text-zinc-500">
-												{formatRange(item.fromDate, item.toDate)}
+												{formatRange(item.fromDate, item.toDate, item.isPresent)}
 											</p>
 										</div>
 										<p className="text-sm">{item.degree}</p>
