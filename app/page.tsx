@@ -95,19 +95,17 @@ export default async function Home() {
 					<p className="motion-item text-sm">{resume.intro}</p>
 					<p className="motion-item pt-2 text-sm">{resume.summary}</p>
 					{resume.skills.length > 0 ? (
-						<div className="motion-item pt-2 text-sm text-justify">
-  <p>
-    I primarily use the following technologies for building my software.
-  </p>
-
-  <div className="mt-2 flex flex-wrap gap-2">
+						<p className="motion-item pt-2 text-sm">
+  <span className="inline-flex flex-wrap items-center gap-2">
+    I primarily use
     {resume.skills.map((skill, index) => (
       <Chip index={index} key={skill}>
         {skill}
       </Chip>
     ))}
-  </div>
-</div>
+    for building my software.
+  </span>
+</p>
 					) : null}
 				</div>
 			</header>
