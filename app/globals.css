@@ -344,6 +344,17 @@ body {
 		background-color 160ms ease-out,
 		color 160ms ease-out;
 }
+.morph-static {
+	border-radius: 0;
+	box-shadow: 4px 4px 0 #000;
+}
+
+.dark .morph-static {
+	border-radius: 0;
+		box-shadow:
+		4px 4px 0 rgb(34 211 238),
+		0 0 18px rgb(34 211 238 / 0.18);
+}
 
 .morph-chip:hover,
 .morph-button:hover,
