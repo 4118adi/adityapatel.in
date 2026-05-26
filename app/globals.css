@@ -347,6 +347,16 @@ strong {
 		background-color 160ms ease-out,
 		color 160ms ease-out;
 }
+
+.morph-button {
+	border-radius: 0;
+	box-shadow: 4px 4px 0 #000;
+	transition:
+		transform 160ms ease-out,
+		box-shadow 160ms ease-out,
+		background-color 160ms ease-out,
+		color 160ms ease-out;
+}
 .morph-static {
 	border-radius: 0;
 	box-shadow: 2px 2px 0 #000;
@@ -360,14 +370,16 @@ strong {
 }
 
 .morph-chip:hover,
-.morph-button:hover,
 .morph-link:hover {
 	box-shadow: 4px 4px 0 #000;
 	transform: translate(-2px, -2px);
 }
-
+.dark .morph-button:hover {
+	border-color: rgb(34 211 238 / 0.65);
+	box-shadow:
+		0 0 18px rgb(34 211 238 / 0.18);
+}
 .dark .morph-chip:hover,
-.dark .morph-button:hover,
 .dark .morph-link:hover {
 	border-color: rgb(34 211 238 / 0.65);
 	box-shadow:
