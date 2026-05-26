@@ -10,6 +10,7 @@ export type ResumeExperience = {
 	role: string;
 	fromDate: string;
 	toDate: string;
+	isPresent?: boolean;
 	url: string;
 	description: string;
 	techStack: string[];
@@ -27,6 +28,7 @@ export type ResumeEducation = {
 	degree: string;
 	fromDate: string;
 	toDate: string;
+	isPresent?: boolean;
 	grade: string;
 };
 
