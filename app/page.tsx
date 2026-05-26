@@ -85,7 +85,7 @@ export default async function Home() {
 			<ThemeToggle />
 			<header className="screen-section site-shell" data-screen-section>
 				<div className="section-inner m-auto max-w-[640px] px-6">
-					<p className="motion-item w-fit border border-zinc-200 bg-zinc-50 px-2 py-1 text-sm text-zinc-500 shadow-[3px_3px_0_#000] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-500">
+					<p className="motion-item morph-static w-fit border border-zinc-200 bg-zinc-50 px-2 py-1 text-sm text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-500">
 						{resume.role}
 						{resume.location ? ` / ${resume.location}` : ""}
 					</p>
