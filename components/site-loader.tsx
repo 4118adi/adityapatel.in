@@ -1,4 +1,4 @@
-"use client";
+8"use client";
 
 import { useEffect, useState } from "react";
 
@@ -19,6 +19,6 @@ export function SiteLoader() {
 
 	return (
 		<div aria-label="Loading site" className="site-loader" role="status">
-			<div className="site-loader-mark"></div></div>
+			<div className="site-loader-mark"><span><span><span><span></div></div>
 	);
 }
