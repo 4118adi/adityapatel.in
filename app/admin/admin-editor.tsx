@@ -126,7 +126,6 @@ function SectionHeader({
 
 export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 	const [resume, setResume] = useState(initialData);
-	const [techStackInput, setTechStackInput] = useState(item.techStack.join(', '));
 	const payload = useMemo(() => JSON.stringify(resume), [resume]);
 
 	function update<Key extends keyof ResumeData>(key: Key, value: ResumeData[Key]) {
@@ -244,8 +243,8 @@ export function AdminEditor({ initialData }: { initialData: ResumeData }) {
 							<div className="mt-4">
 								<Field
 									label="Tech stack highlights, comma separated"
-									onChange={(value) => {setTechStackInput(value); updateArrayItem<ResumeExperience>("experience", index, { ...item, techStack: parseCommaList(value) });}}
-									value={techStackInput}
+									onChange={(value) => updateArrayItem<ResumeExperience>("experience", index, { ...item, techStack: parseCommaList(value) })}
+									value={item.techStack.join(', ')}
 								/>
 							</div>
 							<button className="morph-link mt-4 text-sm" onClick={() => removeArrayItem("experience", index)} type="button">
