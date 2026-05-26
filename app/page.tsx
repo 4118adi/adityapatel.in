@@ -92,14 +92,6 @@ export default async function Home() {
 					<h1 className="motion-item pt-8 text-4xl text-zinc-950 dark:text-zinc-100">
 						{resume.name}
 					</h1>
-					<p className="motion-item pb-4 text-sm text-zinc-700 dark:text-zinc-400">
-						<a
-							className="underline hover:text-zinc-950 dark:hover:text-zinc-100"
-							href={`https://www.github.com/4118adi`}
-						>
-							{resume.handle}
-						</a>
-					</p>
 					<p className="motion-item text-sm">{resume.intro}</p>
 					<p className="motion-item pt-2 text-sm">{resume.summary}</p>
 					{resume.skills.length > 0 ? (
@@ -107,7 +99,7 @@ export default async function Home() {
 							I primarily use{" "}
 							{resume.skills.map((skill, index) => (
 								<Chip index={index} key={skill}>
-									{skill}
+									{skill}{" "}
 								</Chip>
 							))}
 							for building my software.
