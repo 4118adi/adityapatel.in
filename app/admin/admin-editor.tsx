@@ -47,31 +47,35 @@ function Field({ label, value, onChange, textarea, type = "text" }: FieldProps) 
 function MonthOrPresentField({
 	label,
 	value,
-	onChange,
+	isPresent,
+	onDateChange,
+	onPresentChange,
 }: {
 	label: string;
 	value: string;
-	onChange: (value: string) => void;
+	isPresent: boolean;
+	onDateChange: (value: string) => void;
+	onPresentChange: (value: boolean) => void;
 }) {
-	const isPresent = value === "Present";
-
 	return (
 		<div className="grid gap-2">
 			<Field
 				label={label}
-				onChange={onChange}
 				type="month"
 				value={isPresent ? "" : value}
+				onChange={onDateChange}
+				disabled={isPresent}
 			/>
+
 			<label className="flex items-center gap-2 text-sm text-zinc-950 dark:text-zinc-100">
-	<input
-		type="checkbox"
-		className="appearance-auto h-4 w-4 accent-zinc-900 dark:accent-zinc-100"
-		checked={isPresent}
-		onChange={(e) => onPresentChange(e.target.checked)}
-	/>
-	<span>Present</span>
-</label>
+				<input
+					type="checkbox"
+					className="appearance-auto h-4 w-4 accent-zinc-900 dark:accent-zinc-100"
+					checked={isPresent}
+					onChange={(e) => onPresentChange(e.target.checked)}
+				/>
+				<span>Present</span>
+			</label>
 		</div>
 	);
 }
